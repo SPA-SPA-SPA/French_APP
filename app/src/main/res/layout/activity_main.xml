@@ -25,7 +25,8 @@
             android:layout_below="@+id/imageView_0"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="查询单词" />
+            android:text="查询单词"
+            android:onClick="findWord"/>
 
         <Button
             android:id="@+id/NoteBook_page"
