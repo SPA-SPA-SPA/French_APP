@@ -6,56 +6,67 @@
     android:layout_height="match_parent"
     tools:context="com.example.arthurlai.ever.FindWordActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         >
-        <Button
-            android:id="@+id/Button_delete"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:text="X"
-            android:onClick="deleteWord"
-            />
-
-        <EditText
-            android:id="@+id/edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/Button_delete"
-            android:layout_toLeftOf="@+id/Button_search"
-            android:paddingLeft="10dp"
-            android:inputType="text"
-            android:gravity="center_vertical"
-            android:hint="请在此输入单词" />
-
-        <Button
-            android:id="@+id/Button_search"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:text="查询"
-            />
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/Button_delete"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:text="X"
+                android:onClick="deleteWord"
+                />
 
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/Button_delete"
+                android:layout_toLeftOf="@+id/Button_search"
+                android:paddingLeft="10dp"
+                android:inputType="text"
+                android:gravity="center_vertical"
+                android:hint="请在此输入单词" />
+
+            <Button
+                android:id="@+id/Button_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:text="查询"
+                android:onClick="findWord" />
+        </RelativeLayout>
+
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
         <TextView
             android:id="@+id/Text_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_text"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
             android:textSize="40dp"
-            android:text="单词"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/Text_change"
@@ -66,10 +77,10 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
             android:textSize="20dp"
-            android:text="变化"/>
+            android:text=""/>
 
         <TextView
-            android:id="@+id/Text_sound"
+            android:id="@+id/Text_pronounces"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Text_change"
@@ -77,19 +88,31 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
             android:textSize="20dp"
-            android:text="读音"/>
+            android:text=""/>
 
         <TextView
-            android:id="@+id/Text_explain"
+            android:id="@+id/Text_trans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Text_sound"
+            android:layout_below="@id/Text_pronounces"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
             android:textSize="20dp"
-            android:text="解释"/>
+            android:text=""/>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/Text_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Text_trans"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="1dp"
+            android:textSize="20dp"
+            android:text=""/>
+</RelativeLayout>
+</ScrollView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
