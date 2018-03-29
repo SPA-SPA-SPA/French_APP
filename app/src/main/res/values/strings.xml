@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Ever</string>
+    <string name="FindWordActivity">查询单词</string>
+    <string name="WordListActivity">生词本</string>
 </resources>

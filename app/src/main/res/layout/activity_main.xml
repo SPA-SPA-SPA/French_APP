@@ -35,6 +35,7 @@
             android:layout_below="@+id/FindWord_page"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:onClick="WordList"
             android:text="生词本" />
 
 

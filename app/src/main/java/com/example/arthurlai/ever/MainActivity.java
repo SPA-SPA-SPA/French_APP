@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FindWordActivity.class);
         startActivity(intent);
     }
+
+    public void WordList(View view) {
+        Intent intent = new Intent(this, WordListActivity.class);
+        startActivity(intent);
+    }
 }
