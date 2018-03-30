@@ -24,14 +24,14 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // 创建了一个WORDS表
         db.execSQL("CREATE TABLE WORDS ("
-                + "_id INTERGER PRIMARY KEY AUTOINCREMENT,"
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "Text_word TEXT,"
                 + "Text_change TEXT,"
                 + "Text_pronounces TEXT,"
                 + "Text_trans TEXT);"
         );
         // 输入例子
-        insertWord(db, "ありがとう", "", "[ありがとう] [arigatou] ②",
+        insertWord(db, "ありがとう", null, "[ありがとう] [arigatou] ②",
                 "【感叹词】 1.谢谢。");
     }
 
