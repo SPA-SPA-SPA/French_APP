@@ -15,29 +15,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/Text_WordList"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/Button_DeleteAllWords"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="30dp"
-            android:text="生词本"
+            android:text="删除所有单词"
+            />
+
+        <TextView
+            android:id="@+id/Text_blank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             />
 
         <Button
             android:id="@+id/Button_revise"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/Text_WordList"
-            android:layout_weight="3"
-            android:textSize="30dp"
-            android:text="复习"
+            android:text="学习"
             />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/Text_JustAView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0个单词"
+        />
+
     <ListView
+        android:id="@+id/List_Words"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:entries="@array/examples">
 
     </ListView>
 
