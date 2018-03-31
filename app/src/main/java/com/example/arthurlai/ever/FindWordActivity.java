@@ -1,8 +1,12 @@
 package com.example.arthurlai.ever;
 
 import android.app.ProgressDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.os.AsyncTask;
-import android.provider.DocumentsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +19,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-import javax.xml.transform.Result;
-
 public class FindWordActivity extends AppCompatActivity {
 
     private TextView Text_word;
@@ -24,6 +26,7 @@ public class FindWordActivity extends AppCompatActivity {
     private TextView Text_pronounces;
     private TextView Text_trans;
     private TextView Text_source;
+    private TextView Text_InOrNot;
     private ProgressDialog dialog;
 
     @Override
@@ -36,18 +39,30 @@ public class FindWordActivity extends AppCompatActivity {
         Text_pronounces = (TextView) findViewById(R.id.Text_pronounces);
         Text_trans = (TextView) findViewById(R.id.Text_trans);
         Text_source = (TextView) findViewById(R.id.Text_source);
+        Text_InOrNot = (TextView) findViewById(R.id.Text_InOrNot);
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("正在查询");
     }
 
+    // 删除输入框的单词
     public void deleteWord(View view) {
         EditText editText = (EditText) findViewById(R.id.edit_text);
         editText.setText("");
     }
 
+    // 查询单词
     public void findWord(View view){
-        new WordTask().execute();
+        // 需要获取输入框的词和wordlist表的单词对比，看是否已经出现在单词表中
+        // 如果有，显示已经存储在生词本中
+        // 如果没有，显示没有存储在生词本中，并上网查找
+        EditText editText = (EditText) findViewById(R.id.edit_text);
+        new checkWord().execute(editText.getText().toString());
+    }
+
+    // 添加单词进单词本中
+    public void addWordToWordList(View view) {
+
     }
 
     // Inner class to findWord
@@ -103,6 +118,71 @@ public class FindWordActivity extends AppCompatActivity {
             Text_source.setText("资料来源：沪江小D");
             dialog.dismiss();
             super.onPostExecute(o);
+        }
+    }
+
+    // inner class to checkWord
+    class checkWord extends AsyncTask<String, Void, Integer> {
+        String Text_Word;
+        String Text_Change;
+        String Text_Pronounces;
+        String Text_Trans;
+        public SQLiteDatabase db;
+        public Cursor cursor;
+
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected Integer doInBackground(String... editText) {
+            try {
+                SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
+                db = EverDatabaseHelper.getReadableDatabase();
+                cursor = db.query("WORDS",
+                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_trans"},
+                        "Text_word = ?",
+                        new String[] {editText[0]},
+                        null, null, null);
+                if (cursor.moveToFirst()) {
+                    Text_Word = cursor.getString(0);
+                    Text_Change = cursor.getString(1);
+                    Text_Pronounces = cursor.getString(2);
+                    Text_Trans = cursor.getString(3);
+                    cursor.close();
+                    db.close();
+                    return 1;
+                }
+                else{
+                    cursor.close();
+                    db.close();
+                    return 0;
+                }
+            }catch (SQLiteException e){
+                return 2;
+            }
+        }
+
+        protected void onPostExecute(Integer success){
+            if (success == 2) {
+                Toast toast = Toast.makeText(FindWordActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (success == 1) {
+                Text_InOrNot.setText("已加入生词本");
+                Text_InOrNot.setTextColor(Color.RED);
+                Text_word.setText(Text_Word);
+                Text_change.setText(Text_Change);
+                Text_pronounces.setText(Text_Pronounces);
+                Text_trans.setText(Text_Trans);
+                Text_source.setText("资料来源：沪江小D");
+            }
+            else {
+                // 如果没有，显示没有存储在生词本中，并上网查找
+                Text_InOrNot.setText("还没有加入生词本");
+                Text_InOrNot.setTextColor(Color.DKGRAY);
+                new WordTask().execute();
+            }
         }
     }
 }

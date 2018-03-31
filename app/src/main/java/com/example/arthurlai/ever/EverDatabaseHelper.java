@@ -33,6 +33,8 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 输入例子
         insertWord(db, "ありがとう", null, "[ありがとう] [arigatou] ②",
                 "【感叹词】 1.谢谢。");
+        insertWord(db, "かつて", null, "[かつて] [katsute] ①",
+                "【副词】1.曾经，以前。2.（后接否定）从来（没有）…，至今（未曾）…");
     }
 
     @Override
