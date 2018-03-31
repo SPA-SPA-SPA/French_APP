@@ -130,12 +130,13 @@
 </RelativeLayout>
 </ScrollView>
         <Button
-            android:id="@+id/Button_add"
+            android:id="@+id/Button_addOrDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Text_source"
             android:layout_gravity="center"
-            android:text="+"/>
+            android:onClick="addOrDelete"
+            android:text=""/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

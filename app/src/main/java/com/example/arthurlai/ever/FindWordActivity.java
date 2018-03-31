@@ -1,6 +1,7 @@
 package com.example.arthurlai.ever;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -10,13 +11,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import java.io.IOException;
 
 public class FindWordActivity extends AppCompatActivity {
@@ -27,7 +27,9 @@ public class FindWordActivity extends AppCompatActivity {
     private TextView Text_trans;
     private TextView Text_source;
     private TextView Text_InOrNot;
+    private Button Text_Button_addOrDelete;
     private ProgressDialog dialog;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class FindWordActivity extends AppCompatActivity {
         Text_trans = (TextView) findViewById(R.id.Text_trans);
         Text_source = (TextView) findViewById(R.id.Text_source);
         Text_InOrNot = (TextView) findViewById(R.id.Text_InOrNot);
+        Text_Button_addOrDelete = (Button) findViewById(R.id.Button_addOrDelete);
+        editText = (EditText) findViewById(R.id.edit_text);
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("正在查询");
@@ -47,7 +51,6 @@ public class FindWordActivity extends AppCompatActivity {
 
     // 删除输入框的单词
     public void deleteWord(View view) {
-        EditText editText = (EditText) findViewById(R.id.edit_text);
         editText.setText("");
     }
 
@@ -56,13 +59,22 @@ public class FindWordActivity extends AppCompatActivity {
         // 需要获取输入框的词和wordlist表的单词对比，看是否已经出现在单词表中
         // 如果有，显示已经存储在生词本中
         // 如果没有，显示没有存储在生词本中，并上网查找
-        EditText editText = (EditText) findViewById(R.id.edit_text);
+        // 如果单词已经在单词表中，按钮显示“-”
+        // 如果单词不在单词表中，按钮显示“+”
         new checkWord().execute(editText.getText().toString());
     }
 
     // 添加单词进单词本中
-    public void addWordToWordList(View view) {
-
+    public void addOrDelete(View view) {
+        // 如果单词在表中，删除单词，并更新显示
+        // 如果单词不在表中，增加单词，并更新显示
+        // 如果单词没有资料，跳到手动添加的页面
+        if ((Text_word.getText().toString().length() != 0) && (Text_Button_addOrDelete.getText().toString().equals("—"))){
+            new deleteWord().execute();
+        }
+        if ((Text_word.getText().toString().length() != 0) && (Text_Button_addOrDelete.getText().toString().equals("+"))){
+            new addWord().execute();
+        }
     }
 
     // Inner class to findWord
@@ -121,7 +133,7 @@ public class FindWordActivity extends AppCompatActivity {
         }
     }
 
-    // inner class to checkWord
+    // inner class to checkWord（and then findWord）
     class checkWord extends AsyncTask<String, Void, Integer> {
         String Text_Word;
         String Text_Change;
@@ -176,13 +188,84 @@ public class FindWordActivity extends AppCompatActivity {
                 Text_pronounces.setText(Text_Pronounces);
                 Text_trans.setText(Text_Trans);
                 Text_source.setText("资料来源：沪江小D");
+                Text_Button_addOrDelete.setText("—");
             }
             else {
                 // 如果没有，显示没有存储在生词本中，并上网查找
                 Text_InOrNot.setText("还没有加入生词本");
                 Text_InOrNot.setTextColor(Color.DKGRAY);
+                Text_Button_addOrDelete.setText("+");
                 new WordTask().execute();
             }
         }
     }
+
+    // inner class to addword
+    class addWord extends AsyncTask <Object, Void, Boolean>{
+        public SQLiteDatabase db;
+
+        @Override
+        protected Boolean doInBackground(Object[] objects) {
+            try {
+                SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
+                db = EverDatabaseHelper.getReadableDatabase();
+                ContentValues wordValues = new ContentValues();
+                wordValues.put("Text_Word", Text_word.getText().toString());
+                wordValues.put("Text_change", Text_change.getText().toString());
+                wordValues.put("Text_pronounces", Text_pronounces.getText().toString());
+                wordValues.put("Text_trans", Text_trans.getText().toString());
+                db.insert("WORDS", null, wordValues);
+                db.close();
+                return true;
+            } catch (SQLiteException e) {
+                return false;
+            }
+        }
+
+        protected void onPostExecute (Boolean success) {
+            if (!success) {
+                Toast toast = Toast.makeText(FindWordActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else{
+                Text_InOrNot.setText("已加入生词本");
+                Text_InOrNot.setTextColor(Color.RED);
+                Text_Button_addOrDelete.setText("—");
+            }
+        }
+    }
+
+    // inner class to deleteWord
+    class deleteWord extends AsyncTask <Object, Void, Boolean>{
+        public SQLiteDatabase db;
+
+        @Override
+        protected Boolean doInBackground(Object[] objects) {
+            try {
+                SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
+                db = EverDatabaseHelper.getReadableDatabase();
+                ContentValues wordValues = new ContentValues();
+                db.delete("WORDS",
+                        "Text_word = ?",
+                        new String[] {Text_word.getText().toString()});
+                db.close();
+                return true;
+            } catch (SQLiteException e) {
+                return false;
+            }
+        }
+
+        protected void onPostExecute (Boolean success) {
+            if (!success) {
+                Toast toast = Toast.makeText(FindWordActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else{
+                Text_InOrNot.setText("还没有加入生词本");
+                Text_InOrNot.setTextColor(Color.DKGRAY);
+                Text_Button_addOrDelete.setText("+");
+            }
+        }
+    }
+
 }
