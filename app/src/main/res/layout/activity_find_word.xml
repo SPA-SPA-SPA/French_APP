@@ -52,11 +52,12 @@
         </RelativeLayout>
 
 <ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-<RelativeLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_weight="1">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
         <TextView
@@ -80,19 +81,12 @@
             android:textSize="40dp"
             android:text=""/>
 
-        <Button
-            android:id="@+id/Button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Text_word"
-            android:layout_alignParentRight="true"
-            android:text="+"/>
 
         <TextView
             android:id="@+id/Text_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Button_add"
+            android:layout_below="@id/Text_word"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
@@ -115,6 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Text_pronounces"
+            android:layout_weight="1"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
@@ -131,8 +126,16 @@
             android:layout_marginRight="1dp"
             android:textSize="20dp"
             android:text=""/>
+
 </RelativeLayout>
 </ScrollView>
+        <Button
+            android:id="@+id/Button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Text_source"
+            android:layout_gravity="center"
+            android:text="+"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
