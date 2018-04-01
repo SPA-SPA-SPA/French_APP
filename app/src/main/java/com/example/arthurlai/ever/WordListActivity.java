@@ -1,12 +1,15 @@
 package com.example.arthurlai.ever;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -17,6 +20,7 @@ public class WordListActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private Cursor cursor_getlist;
     private Cursor cursor_getnum;
+    private Cursor cursor_getlist_new;
     private Integer word_num;
 
     @Override
@@ -34,8 +38,13 @@ public class WordListActivity extends AppCompatActivity {
         db.close();
     }
 
+    // 一键删除所有单词
+    public void deleteAllWords(View view) {
+        new DeleteAllWords().execute();
+    }
+
     // Inner class to get wordlist
-    private class GetWordList extends AsyncTask {
+    private class GetWordList extends AsyncTask <Object, Void, Boolean>{
         protected void onPreExecute() {
 
         }
@@ -44,9 +53,6 @@ public class WordListActivity extends AppCompatActivity {
         protected Boolean doInBackground(Object[] objects) {
             ListView listView = (ListView)findViewById(R.id.List_Words);
             try {
-                SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(WordListActivity.this);
-                db = EverDatabaseHelper.getReadableDatabase();
-
                 // 这个游标给列表提供单词
                 cursor_getlist = db.query("WORDS",
                         new String[]{"_id", "Text_word", "Text_trans"},
@@ -92,7 +98,6 @@ public class WordListActivity extends AppCompatActivity {
                         null, null, null, null, null);
                 word_num = cursor_getnum.getCount();
                 cursor_getnum.close();
-                db.close();
                 return true;
             } catch (SQLException e){
                 return false;
@@ -109,6 +114,40 @@ public class WordListActivity extends AppCompatActivity {
                 // 更新单词数
                 String word_justAView = word_num.toString() + "个单词";
                 justAView.setText(word_justAView);
+            }
+        }
+    }
+
+    // Inner class to delete all words
+    private class DeleteAllWords extends AsyncTask <Object, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Object[] objects) {
+            try {
+                db.delete("WORDS",
+                        null,
+                        null);
+                return true;
+            } catch (SQLiteException e) {
+                return false;
+            }
+        }
+
+        protected void onPostExecute (Boolean success) {
+            if (!success) {
+                Toast toast = Toast.makeText(WordListActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else{
+                ListView listView = (ListView)findViewById(R.id.List_Words);
+                cursor_getlist_new = db.query("WORDS",
+                        new String[]{"_id", "Text_word", "Text_trans"},
+                        null, null, null, null, null);
+                CursorAdapter adapter = (CursorAdapter)listView.getAdapter();
+                adapter.changeCursor(cursor_getlist_new);
+                cursor_getlist = cursor_getlist_new;
+                cursor_getlist_new.close();
+                new GetNumOfWords().execute();
             }
         }
     }

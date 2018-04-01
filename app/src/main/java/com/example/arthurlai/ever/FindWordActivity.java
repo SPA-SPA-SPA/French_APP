@@ -82,13 +82,12 @@ public class FindWordActivity extends AppCompatActivity {
         private String url = "https://dict.hjenglish.com/jp/jc/";
         private Document doc;
         private String word;
-        private String change = "获取失败";              // 变体
-        private String pronounces = "获取失败";   // 读音
-        private String trans = "获取失败";      // 翻译
+        private String change = "";              // 变体
+        private String pronounces = "";   // 读音
+        private String trans = "";      // 翻译
 
         @Override
         protected void onPreExecute() {
-            EditText editText = (EditText)findViewById(R.id.edit_text);
             word = editText.getText().toString();
             url = url+ word;
             dialog.show();
@@ -244,7 +243,6 @@ public class FindWordActivity extends AppCompatActivity {
             try {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
-                ContentValues wordValues = new ContentValues();
                 db.delete("WORDS",
                         "Text_word = ?",
                         new String[] {Text_word.getText().toString()});
