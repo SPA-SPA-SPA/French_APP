@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arthurlai.ever.AddWordByHandActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/word_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="1dp"
+                android:textSize="20dp"
+                android:text="单词"/>
+
+            <EditText
+                android:id="@+id/word_byhand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="请在此输入"/>
+
+            <TextView
+                android:id="@+id/change_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="1dp"
+                android:textSize="20dp"
+                android:text="注释"/>
+
+            <EditText
+                android:id="@+id/change_byhand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="请在此输入"/>
+
+            <TextView
+                android:id="@+id/pronounces_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="1dp"
+                android:textSize="20dp"
+                android:text="读音"/>
+
+            <EditText
+                android:id="@+id/pronounces_byhand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="请在此输入"/>
+
+            <TextView
+                android:id="@+id/trans_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="1dp"
+                android:textSize="20dp"
+                android:text="完整解释"/>
+
+            <EditText
+                android:id="@+id/trans_byhand"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:hint="请在此输入"
+                android:gravity="top"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="清空"
+                    android:onClick="DeleteAllText"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="+"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+</android.support.constraint.ConstraintLayout>

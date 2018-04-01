@@ -2,27 +2,5 @@
     <string name="app_name">Ever</string>
     <string name="FindWordActivity">查询单词</string>
     <string name="WordListActivity">生词本</string>
-
-    <string-array name="examples">
-        <item>item 0</item>
-        <item>item 1</item>
-        <item>item 2</item>
-        <item>item 3</item>
-        <item>item 0</item>
-        <item>item 1</item>
-        <item>item 2</item>
-        <item>item 3</item>
-        <item>item 0</item>
-        <item>item 1</item>
-        <item>item 2</item>
-        <item>item 3</item>
-        <item>item 0</item>
-        <item>item 1</item>
-        <item>item 2</item>
-        <item>item 3</item>
-        <item>item 0</item>
-        <item>item 1</item>
-        <item>item 2</item>
-        <item>item 3</item>
-    </string-array>
+    <string name="AddWordByHandActivity">手动添加单词</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.arthurlai.ever;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -73,7 +74,12 @@ public class FindWordActivity extends AppCompatActivity {
             new deleteWord().execute();
         }
         if ((Text_word.getText().toString().length() != 0) && (Text_Button_addOrDelete.getText().toString().equals("+"))){
-            new addWord().execute();
+            if (Text_trans.getText().toString().equals("无资料显示")) {
+                Intent intent = new Intent(this, AddWordByHandActivity.class);
+                startActivity(intent);
+            } else {
+                new addWord().execute();
+            }
         }
     }
 
