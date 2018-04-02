@@ -1,6 +1,7 @@
 package com.example.arthurlai.ever;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,6 +22,7 @@ public class WordListActivity extends AppCompatActivity {
     private Cursor cursor_getlist;
     private Cursor cursor_getnum;
     private Cursor cursor_getlist_new;
+    private Cursor cursor_getlist_new_2;
     private Integer word_num;
 
     @Override
@@ -38,9 +40,28 @@ public class WordListActivity extends AppCompatActivity {
         db.close();
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        ListView listView = (ListView)findViewById(R.id.List_Words);
+        cursor_getlist_new_2 = db.query("WORDS",
+                new String[]{"_id", "Text_word", "Text_trans"},
+                null, null, null, null, null);
+        CursorAdapter adapter = (CursorAdapter)listView.getAdapter();
+        adapter.changeCursor(cursor_getlist_new_2);
+        cursor_getlist = cursor_getlist_new_2;
+        new GetNumOfWords().execute();
+    }
+
     // 一键删除所有单词
     public void deleteAllWords(View view) {
         new DeleteAllWords().execute();
+    }
+
+    // 手动添加单词
+    public void addWordByhand2 (View view) {
+        Intent intent = new Intent(this, AddWordByHandActivity.class);
+        startActivity(intent);
     }
 
     // Inner class to get wordlist
