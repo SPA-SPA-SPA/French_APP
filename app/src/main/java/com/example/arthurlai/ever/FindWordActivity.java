@@ -62,7 +62,10 @@ public class FindWordActivity extends AppCompatActivity {
         // 如果没有，显示没有存储在生词本中，并上网查找
         // 如果单词已经在单词表中，按钮显示“-”
         // 如果单词不在单词表中，按钮显示“+”
-        new checkWord().execute(editText.getText().toString());
+        // 下面这个判断是用来筛掉输入框为空或输入首字符为空格的情况
+        if ((editText.getText().toString().length() != 0) &&
+                (editText.getText().toString().charAt(0) != ' '))
+            new checkWord().execute(editText.getText().toString());
     }
 
     // 添加单词进单词本中
@@ -76,6 +79,7 @@ public class FindWordActivity extends AppCompatActivity {
         if ((Text_word.getText().toString().length() != 0) && (Text_Button_addOrDelete.getText().toString().equals("+"))){
             if (Text_trans.getText().toString().equals("无资料显示")) {
                 Intent intent = new Intent(this, AddWordByHandActivity.class);
+                intent.putExtra("word", Text_word.getText().toString());
                 startActivity(intent);
             } else {
                 new addWord().execute();
@@ -192,7 +196,7 @@ public class FindWordActivity extends AppCompatActivity {
                 Text_change.setText(Text_Change);
                 Text_pronounces.setText(Text_Pronounces);
                 Text_trans.setText(Text_Trans);
-                Text_source.setText("资料来源：沪江小D");
+                Text_source.setText("资料来源：本地生词本");
                 Text_Button_addOrDelete.setText("—");
             }
             else {

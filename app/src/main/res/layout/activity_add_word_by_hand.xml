@@ -17,7 +17,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="1dp"
                 android:textSize="20dp"
-                android:text="单词"/>
+                android:text="单词（*）"/>
 
             <EditText
                 android:id="@+id/word_byhand"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="1dp"
                 android:textSize="20dp"
-                android:text="完整解释"/>
+                android:text="完整解释（*）"/>
 
             <EditText
                 android:id="@+id/trans_byhand"
@@ -90,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:onClick="AddWordByHand"
                     android:text="+"/>
 
             </RelativeLayout>
