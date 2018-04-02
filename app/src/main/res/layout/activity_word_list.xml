@@ -35,7 +35,8 @@
             android:id="@+id/Button_revise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学习"
+            android:onClick="StudyTouch"
+            android:text="测试"
             />
     </LinearLayout>
 

@@ -20,12 +20,15 @@
         </activity>
         <activity
             android:name=".FindWordActivity"
-            android:label="@string/FindWordActivity"></activity>
+            android:label="@string/FindWordActivity" />
         <activity
             android:name=".WordListActivity"
-            android:label="@string/WordListActivity"></activity>
-        <activity android:name=".AddWordByHandActivity"
-            android:label="@string/AddWordByHandActivity"></activity>
+            android:label="@string/WordListActivity" />
+        <activity
+            android:name=".AddWordByHandActivity"
+            android:label="@string/AddWordByHandActivity" />
+        <activity android:name=".TestActivity"
+            android:label="@string/TestActivity"></activity>
     </application>
 
 </manifest>

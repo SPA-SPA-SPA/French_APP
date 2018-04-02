@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arthurlai.ever.TestActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/text_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="总测试词数为："/>
+
+            <TextView
+                android:id="@+id/text_right"
+                android:layout_below="@+id/text_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="答对词数为："/>
+
+            <TextView
+                android:id="@+id/text_wrong"
+                android:layout_below="@+id/text_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="答错词数为："/>
+
+            <TextView
+                android:id="@+id/text_sum_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_toRightOf="@+id/text_sum"
+                android:text="60"/>
+
+            <TextView
+                android:id="@+id/text_right_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/text_right"
+                android:textSize="20dp"
+                android:layout_below="@+id/text_sum_num"
+                android:text="50"/>
+
+            <TextView
+                android:id="@+id/text_wrong_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_toRightOf="@+id/text_wrong"
+                android:layout_below="@+id/text_right_num"
+                android:text="10"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/Button_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="全部测试"/>
+
+        <Button
+            android:id="@+id/Button_some"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="部分测试"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

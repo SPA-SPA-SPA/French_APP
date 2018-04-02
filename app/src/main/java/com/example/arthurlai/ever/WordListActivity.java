@@ -64,6 +64,12 @@ public class WordListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 测试按钮
+    public void StudyTouch (View view) {
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivity(intent);
+    }
+
     // Inner class to get wordlist
     private class GetWordList extends AsyncTask <Object, Void, Boolean>{
         protected void onPreExecute() {
