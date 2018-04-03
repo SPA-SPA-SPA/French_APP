@@ -33,6 +33,7 @@
         <activity
             android:name=".TestQActivity"
             android:label="@string/TestQActivity" />
+        <activity android:name=".TestQ2Activity"></activity>
     </application>
 
 </manifest>

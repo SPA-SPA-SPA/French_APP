@@ -84,7 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:text="部分测试"/>
+            android:text="部分测试"
+            android:onClick="TestSome"/>
 
 
     </LinearLayout>

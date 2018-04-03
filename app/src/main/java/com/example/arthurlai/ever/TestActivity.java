@@ -21,6 +21,8 @@ public class TestActivity extends AppCompatActivity {
     private TextView Text_sum_num;
     private Cursor cursor_T;
     private Cursor cursor_F;
+    public Integer word_num_T;
+    public Integer word_num_F;
     public SQLiteDatabase db;
 
     @Override
@@ -47,13 +49,19 @@ public class TestActivity extends AppCompatActivity {
     // 测试所有单词
     public void TestAll(View view) {
         Intent intent = new Intent(this, TestQActivity.class);
-        startActivityForResult(intent,3);
+        startActivity(intent);
+    }
+
+    // 测试部分单词
+    public void TestSome(View view) {
+        if(word_num_F > 0) {
+            Intent intent = new Intent(this, TestQ2Activity.class);
+            startActivity(intent);
+        }
     }
 
     // Inner class to getnum
     private class GetNum extends AsyncTask<Object, Void, Boolean> {
-        public Integer word_num_T;
-        public Integer word_num_F;
 
         @Override
         protected Boolean doInBackground(Object[] objects) {
