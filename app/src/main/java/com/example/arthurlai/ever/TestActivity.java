@@ -48,8 +48,10 @@ public class TestActivity extends AppCompatActivity {
 
     // 测试所有单词
     public void TestAll(View view) {
-        Intent intent = new Intent(this, TestQActivity.class);
-        startActivity(intent);
+        if ((word_num_F + word_num_T) != 0) {
+            Intent intent = new Intent(this, TestQActivity.class);
+            startActivity(intent);
+        }
     }
 
     // 测试部分单词
