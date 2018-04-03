@@ -75,7 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:text="全部测试"/>
+            android:text="全部测试"
+            android:onClick="TestAll"/>
 
         <Button
             android:id="@+id/Button_some"

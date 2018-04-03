@@ -27,8 +27,12 @@
         <activity
             android:name=".AddWordByHandActivity"
             android:label="@string/AddWordByHandActivity" />
-        <activity android:name=".TestActivity"
-            android:label="@string/TestActivity"></activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/TestActivity" />
+        <activity
+            android:name=".TestQActivity"
+            android:label="@string/TestQActivity" />
     </application>
 
 </manifest>
