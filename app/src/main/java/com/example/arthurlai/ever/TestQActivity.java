@@ -1,5 +1,6 @@
 package com.example.arthurlai.ever;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +25,7 @@ public class TestQActivity extends AppCompatActivity {
     private Button ButtonAnswer;
     public SQLiteDatabase db;
     public Cursor cursor;
+    public Cursor cursor_test_all;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class TestQActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
         cursor.close();
+        cursor_test_all.close();
         db.close();
     }
 
@@ -67,6 +70,12 @@ public class TestQActivity extends AppCompatActivity {
         ButtonYes.setVisibility(View.INVISIBLE);
         ButtonNo.setVisibility(View.INVISIBLE);
         ButtonAnswer.setVisibility(View.VISIBLE);
+        ContentValues Values = new ContentValues();
+        Values.put("test", "false");
+        db.update("TEST",
+                Values,
+                "Text_word = ?",
+                new String[] {cursor.getString(0)});
 
         if (cursor.moveToNext()) {
             wordQ.setText(cursor.getString(0));
@@ -83,6 +92,12 @@ public class TestQActivity extends AppCompatActivity {
         ButtonYes.setVisibility(View.INVISIBLE);
         ButtonNo.setVisibility(View.INVISIBLE);
         ButtonAnswer.setVisibility(View.VISIBLE);
+        ContentValues Values = new ContentValues();
+        Values.put("test", "true");
+        db.update("TEST",
+                Values,
+                "Text_word = ?",
+                new String[] {cursor.getString(0)});
 
         if (cursor.moveToNext()) {
             wordQ.setText(cursor.getString(0));
@@ -104,6 +119,11 @@ public class TestQActivity extends AppCompatActivity {
                 db = EverDatabaseHelper.getReadableDatabase();
                 cursor = db.query("WORDS",
                         new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_trans"},
+                        null,
+                        null,
+                        null, null, null);
+                cursor_test_all = db.query("TEST",
+                        new String[] {"Text_word","test"},
                         null,
                         null,
                         null, null, null);

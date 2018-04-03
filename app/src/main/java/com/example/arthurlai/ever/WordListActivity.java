@@ -65,8 +65,9 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     // 测试按钮
-    public void StudyTouch (View view) {
+    public void TestTouch (View view) {
         Intent intent = new Intent(this, TestActivity.class);
+        intent.putExtra("num", word_num.toString());
         startActivity(intent);
     }
 

@@ -30,11 +30,22 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
                 + "Text_pronounces TEXT,"
                 + "Text_trans TEXT);"
         );
+
+        // 创建了一个TEST表
+        db.execSQL("CREATE TABLE TEST ("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "Text_word TEXT ,"
+                + "Test TEXT,"
+                + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));"
+        );
+
         // 输入例子
         insertWord(db, "ありがとう", null, "[ありがとう] [arigatou] ②",
                 "【感叹词】 1.谢谢。");
         insertWord(db, "かつて", null, "[かつて] [katsute] ①",
                 "【副词】1.曾经，以前。2.（后接否定）从来（没有）…，至今（未曾）…");
+        insertTEST(db, "ありがとう", null);
+        insertTEST(db, "かつて", null);
     }
 
     @Override
@@ -42,7 +53,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    // 插入
+    // 插入WORDS
     private static void insertWord(SQLiteDatabase db, String Text_word, String Text_change,
                                    String Text_pronounces, String Text_trans){
         ContentValues wordValues = new ContentValues();
@@ -52,4 +63,13 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         wordValues.put("Text_trans", Text_trans);
         db.insert("WORDS", null, wordValues);
     }
+
+    // 插入TEST
+    private static void insertTEST(SQLiteDatabase db, String Text_word, String TOF){
+        ContentValues TestValues = new ContentValues();
+        TestValues.put("Text_word", Text_word);
+        TestValues.put("test", TOF);
+        db.insert("TEST", null, TestValues);
+    }
+
 }
