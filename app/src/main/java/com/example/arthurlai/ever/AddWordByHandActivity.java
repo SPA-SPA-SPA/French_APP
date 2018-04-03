@@ -59,12 +59,19 @@ public class AddWordByHandActivity extends AppCompatActivity {
             try {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(AddWordByHandActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
+                // 添加单词
                 ContentValues wordValues = new ContentValues();
                 wordValues.put("Text_Word", word_byhand.getText().toString());
                 wordValues.put("Text_change", change_byhand.getText().toString());
                 wordValues.put("Text_pronounces", pronounces_byhand.getText().toString());
                 wordValues.put("Text_trans", trans_byhand.getText().toString());
                 db.insert("WORDS", null, wordValues);
+
+                // 添加test标志
+                ContentValues testValues = new ContentValues();
+                testValues.put("Text_word", word_byhand.getText().toString());
+                testValues.put("test", "");
+                db.insert("TEST",null, testValues);
                 db.close();
                 return true;
             } catch (SQLiteException e) {

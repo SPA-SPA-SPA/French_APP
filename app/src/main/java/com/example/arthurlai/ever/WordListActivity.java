@@ -155,6 +155,9 @@ public class WordListActivity extends AppCompatActivity {
                 db.delete("WORDS",
                         null,
                         null);
+                db.delete("TEST",
+                        null,
+                        null);
                 return true;
             } catch (SQLiteException e) {
                 return false;
