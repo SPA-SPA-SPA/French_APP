@@ -33,9 +33,12 @@
         <activity
             android:name=".TestQActivity"
             android:label="@string/TestQActivity" />
-        <activity android:name=".TestQ2Activity" />
-        <activity android:name=".SeeTheWordActivity" />
-        <activity android:name=".UpdateActivity"></activity>
+        <activity android:name=".TestQ2Activity"
+            android:label="@string/TestQ2Activity"/>
+        <activity android:name=".SeeTheWordActivity"
+            android:label="@string/SeeTheWordActivity"/>
+        <activity android:name=".UpdateActivity"
+            android:label="@string/UpdateActivity"></activity>
     </application>
 
 </manifest>
