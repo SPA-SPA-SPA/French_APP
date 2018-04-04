@@ -48,7 +48,7 @@ public class TestActivity extends AppCompatActivity {
 
     // 测试所有单词
     public void TestAll(View view) {
-        if ((word_num_F + word_num_T) != 0) {
+        if (Integer.valueOf(getIntent().getStringExtra("num")) != 0) {
             Intent intent = new Intent(this, TestQActivity.class);
             startActivity(intent);
         }

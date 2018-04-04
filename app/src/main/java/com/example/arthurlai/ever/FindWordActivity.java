@@ -223,6 +223,12 @@ public class FindWordActivity extends AppCompatActivity {
                 wordValues.put("Text_change", Text_change.getText().toString());
                 wordValues.put("Text_pronounces", Text_pronounces.getText().toString());
                 wordValues.put("Text_trans", Text_trans.getText().toString());
+
+                // 添加test标志
+                ContentValues testValues = new ContentValues();
+                testValues.put("Text_word", Text_word.getText().toString());
+                testValues.put("test", "");
+                db.insert("TEST",null, testValues);
                 db.insert("WORDS", null, wordValues);
                 db.close();
                 return true;
@@ -254,6 +260,9 @@ public class FindWordActivity extends AppCompatActivity {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
                 db.delete("WORDS",
+                        "Text_word = ?",
+                        new String[] {Text_word.getText().toString()});
+                db.delete("TEST",
                         "Text_word = ?",
                         new String[] {Text_word.getText().toString()});
                 db.close();

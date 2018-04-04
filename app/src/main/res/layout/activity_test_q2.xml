@@ -55,30 +55,33 @@
             android:textSize="20dp"
             android:text=""/>
 
-        <Button
-            android:id="@+id/Button_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="No"
-            android:text="不认识"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/Button_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="No"
+                android:text="不认识"/>
 
-        <Button
-            android:id="@+id/Button_answer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="SeeAnswer"
-            android:text="显示答案"/>
+            <Button
+                android:id="@+id/Button_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SeeAnswer"
+                android:text="显示答案"/>
 
 
-        <Button
-            android:id="@+id/Button_yes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="Yes"
-            android:text="认识"/>
+            <Button
+                android:id="@+id/Button_yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Button_no"
+                android:layout_marginTop="20dp"
+                android:onClick="Yes"
+                android:text="认识"/>
+        </RelativeLayout>
 
     </LinearLayout>
 

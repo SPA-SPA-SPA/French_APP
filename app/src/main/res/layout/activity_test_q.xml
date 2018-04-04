@@ -10,75 +10,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/Text_word_q"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp"
-            android:layout_weight="1"
-            android:textSize="40dp"
-            android:text=""/>
-
-        <TextView
-            android:id="@+id/Text_change_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Text_word_q"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp"
-            android:textSize="20dp"
-            android:text=""/>
-
-        <TextView
-            android:id="@+id/Text_pronounces_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Text_change_a"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp"
-            android:textSize="20dp"
-            android:text=""/>
-
-        <TextView
-            android:id="@+id/Text_trans_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Text_pronounces_a"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp"
-            android:textSize="20dp"
-            android:text=""/>
-
-            <Button
-                android:id="@+id/Button_no"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="No"
-                android:text="不认识"/>
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/Text_word_q"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:textSize="40dp"
+                        android:text=""/>
 
-            <Button
-                android:id="@+id/Button_answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="SeeAnswer"
-                android:text="显示答案"/>
+                    <TextView
+                        android:id="@+id/Text_change_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Text_word_q"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="1dp"
+                        android:textSize="20dp"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/Text_pronounces_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Text_change_a"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="1dp"
+                        android:textSize="20dp"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/Text_trans_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Text_pronounces_a"
+                        android:layout_weight="1"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="1dp"
+                        android:textSize="20dp"
+                        android:text=""/>
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/Button_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="No"
+                    android:text="不认识"/>
+
+                <Button
+                    android:id="@+id/Button_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="SeeAnswer"
+                    android:text="显示答案"/>
 
 
-            <Button
-                android:id="@+id/Button_yes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="Yes"
-                android:text="认识"/>
+                <Button
+                    android:id="@+id/Button_yes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Button_no"
+                    android:layout_marginTop="20dp"
+                    android:onClick="Yes"
+                    android:text="认识"/>
+            </RelativeLayout>
 
     </LinearLayout>
 

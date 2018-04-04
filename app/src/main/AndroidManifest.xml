@@ -33,7 +33,8 @@
         <activity
             android:name=".TestQActivity"
             android:label="@string/TestQActivity" />
-        <activity android:name=".TestQ2Activity"></activity>
+        <activity android:name=".TestQ2Activity" />
+        <activity android:name=".SeeTheWordActivity"></activity>
     </application>
 
 </manifest>
