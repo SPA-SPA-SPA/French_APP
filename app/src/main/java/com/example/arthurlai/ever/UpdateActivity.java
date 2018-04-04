@@ -51,7 +51,7 @@ public class UpdateActivity extends AppCompatActivity {
     public void DeleteAllText (View view) {
         change_update.setText("");
         pronounces_update.setText("");
-        trans_update.setText("");
+        trans_update.setText("\n");
     }
 
     // 提交修改
@@ -101,7 +101,7 @@ public class UpdateActivity extends AppCompatActivity {
 
                     change_update.setText(change);
                     pronounces_update.setText(pronounces);
-                    trans_update.setText(trans);
+                    trans_update.setText(trans+"\n");
             }
         }
     }

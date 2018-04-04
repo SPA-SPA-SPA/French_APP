@@ -6,19 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.arthurlai.ever.UpdateActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ScrollView
-            android:id="@+id/scrollView_0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -28,7 +18,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="40dp"
+                    android:textSize="20dp"
                     android:text=""/>
 
                 <TextView
@@ -80,31 +70,26 @@
                     android:hint="请在此输入"
                     android:gravity="top"/>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:onClick="DeleteAllText"
+                        android:text="清空" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:onClick="Update"
+                        android:text="修改完成"/>
+
+                </RelativeLayout>
+
             </LinearLayout>
-
-        </ScrollView>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/scrollView_0">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:onClick="DeleteAllText"
-                    android:text="清空" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:onClick="Update"
-                    android:text="修改完成"/>
-
-            </RelativeLayout>
-
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

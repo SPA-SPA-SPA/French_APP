@@ -11,13 +11,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/Button_update"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:onClick="update"
-                android:text="修改"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/Button_deleteThisWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="delete"
+                    android:text="删除"/>
+
+                <Button
+                    android:id="@+id/Button_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:onClick="update"
+                    android:text="修改"/>
+            </RelativeLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
