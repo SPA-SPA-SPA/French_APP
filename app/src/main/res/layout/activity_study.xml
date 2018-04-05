@@ -18,16 +18,9 @@
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
-                android:id="@+id/should"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="今天要学习的词数为："/>
 
             <TextView
                 android:id="@+id/have"
-                android:layout_below="@+id/should"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -41,13 +34,6 @@
                 android:textSize="20dp"
                 android:text="今天未学词数为："/>
 
-            <TextView
-                android:id="@+id/text_should"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/should"
-                android:text=""/>
 
             <TextView
                 android:id="@+id/text_have"
@@ -55,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/have"
                 android:textSize="20dp"
-                android:layout_below="@+id/text_should"
                 android:text=""/>
 
             <TextView

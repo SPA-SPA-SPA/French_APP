@@ -19,7 +19,6 @@ public class StudyActivity extends AppCompatActivity {
     private TextView Text_should;
     private TextView Text_have;
     private TextView Text_yet;
-    private Integer should = 0;
     private Integer have = 0;
     private Integer yet = 0;
     private Integer year;
@@ -98,7 +97,6 @@ public class StudyActivity extends AppCompatActivity {
                         null, null, null);
                 have = cursor_have.getCount();
                 yet = cursor_yet.getCount();
-                should = have + yet;
                 return true;
             }catch(SQLException e){
                 return false;
@@ -112,7 +110,6 @@ public class StudyActivity extends AppCompatActivity {
             }
             else
             {
-                Text_should.setText(should.toString());
                 Text_have.setText(have.toString());
                 Text_yet.setText(yet.toString());
             }
