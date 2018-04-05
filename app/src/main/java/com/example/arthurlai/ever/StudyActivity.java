@@ -33,7 +33,7 @@ public class StudyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study);
-        
+
         Text_have = (TextView)findViewById(R.id.text_have);
         Text_yet = (TextView)findViewById(R.id.text_yet);
         Text_have.setTextColor(Color.CYAN);
