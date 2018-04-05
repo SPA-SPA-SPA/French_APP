@@ -161,6 +161,9 @@ public class SeeTheWordActivity extends AppCompatActivity {
                 db.delete("TEST",
                         "Text_word = ?",
                         new String[] {TheWord});
+                db.delete("FIBONACCI",
+                        "Text_word = ?",
+                        new String[] {TheWord});
                 if(cursor.moveToNext())
                     TheWord = cursor.getString(0);
                 else {

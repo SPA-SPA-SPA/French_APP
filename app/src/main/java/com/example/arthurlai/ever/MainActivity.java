@@ -23,4 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, WordListActivity.class);
         startActivity(intent);
     }
+
+    public void Study(View view) {
+        Intent intent = new Intent(this, StudyActivity.class);
+        startActivity(intent);
+    }
 }

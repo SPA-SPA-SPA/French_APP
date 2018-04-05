@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Date;
 
 
 class EverDatabaseHelper extends SQLiteOpenHelper {
+    Calendar c = Calendar.getInstance();
     private static final String DB_NAME = "Ever";   // the name of our database
     private static final int DB_VERSION = 1;            //  the version of database
 
@@ -39,6 +41,27 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));"
         );
 
+        // 创建了一个FIBONACCI表
+        db.execSQL("CREATE TABLE FIBONACCI ("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "Text_word TEXT ,"
+                + "Test TEXT,"
+                + "year INTEGER,"
+                + "month INTEGER,"
+                + "date INTEGER,"
+                + "pre INTEGER,"
+                + "R INTEGER,"
+                + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));");
+
+        // 创建了一个WORDDATE表
+        db.execSQL("CREATE TABLE WORDDATE ("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "Text_word TEXT,"
+                + "year INTEGER,"
+                + "month INTEGER,"
+                + "date INTEGER,"
+                + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));");
+
         // 输入例子
         insertWord(db, "ありがとう", null, "[ありがとう] [arigatou] ②",
                 "【感叹词】 1.谢谢。");
@@ -46,6 +69,8 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
                 "【副词】1.曾经，以前。2.（后接否定）从来（没有）…，至今（未曾）…");
         insertTEST(db, "ありがとう", null);
         insertTEST(db, "かつて", null);
+        insertFIBONACCI(db, "ありがとう", c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
+        insertFIBONACCI(db, "かつて",  c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
     }
 
     @Override
@@ -70,6 +95,18 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         TestValues.put("Text_word", Text_word);
         TestValues.put("test", TOF);
         db.insert("TEST", null, TestValues);
+    }
+
+    // 插入FIBONACCI
+    private static void insertFIBONACCI(SQLiteDatabase db, String Text_word, Integer year, Integer month, Integer date, Integer pre, Integer R) {
+        ContentValues FibonacciValues = new ContentValues();
+        FibonacciValues.put("Text_word", Text_word);
+        FibonacciValues.put("year", year);
+        FibonacciValues.put("month",month);
+        FibonacciValues.put("date", date);
+        FibonacciValues.put("pre", pre);
+        FibonacciValues.put("R", R);
+        db.insert("FIBONACCI", null, FibonacciValues);
     }
 
 }

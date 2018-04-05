@@ -172,6 +172,9 @@ public class WordListActivity extends AppCompatActivity {
                 db.delete("TEST",
                         null,
                         null);
+                db.delete("FIBONACCI",
+                        null,
+                        null);
                 return true;
             } catch (SQLiteException e) {
                 return false;

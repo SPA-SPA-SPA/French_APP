@@ -33,12 +33,22 @@
         <activity
             android:name=".TestQActivity"
             android:label="@string/TestQActivity" />
-        <activity android:name=".TestQ2Activity"
-            android:label="@string/TestQ2Activity"/>
-        <activity android:name=".SeeTheWordActivity"
-            android:label="@string/SeeTheWordActivity"/>
-        <activity android:name=".UpdateActivity"
-            android:label="@string/UpdateActivity"></activity>
+        <activity
+            android:name=".TestQ2Activity"
+            android:label="@string/TestQ2Activity" />
+        <activity
+            android:name=".SeeTheWordActivity"
+            android:label="@string/SeeTheWordActivity" />
+        <activity
+            android:name=".UpdateActivity"
+            android:label="@string/UpdateActivity" />
+        <activity
+            android:name=".StudyActivity"
+            android:label="@string/StudyActivity" />
+        <activity android:name=".FibonacciActivity"
+            android:label="@string/FibonacciActivity"/>
+        <activity android:name=".finishActivity"
+            android:label="@string/finishActivity"></activity>
     </application>
 
 </manifest>

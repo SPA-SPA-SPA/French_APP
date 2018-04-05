@@ -12,16 +12,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class AddWordByHandActivity extends AppCompatActivity {
     private EditText word_byhand;
     private EditText change_byhand;
     private EditText pronounces_byhand;
     private EditText trans_byhand;
+    private Integer year;
+    private Integer month;
+    private Integer date;
+    private Calendar today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_word_by_hand);
+
+        today = Calendar.getInstance();
+        year = today.get(Calendar.YEAR);
+        month = today.get(Calendar.MONTH)+1;
+        date = today.get(Calendar.DATE);
+
         word_byhand = (EditText)findViewById(R.id.word_byhand);
         change_byhand = (EditText) findViewById(R.id.change_byhand);
         pronounces_byhand = (EditText) findViewById(R.id.pronounces_byhand);
@@ -72,6 +84,16 @@ public class AddWordByHandActivity extends AppCompatActivity {
                 testValues.put("Text_word", word_byhand.getText().toString());
                 testValues.put("test", "");
                 db.insert("TEST",null, testValues);
+
+                // 添加进生词本时加进斐波那契学习进度中
+                ContentValues FibonacciValues = new ContentValues();
+                FibonacciValues.put("Text_word", word_byhand.getText().toString());
+                FibonacciValues.put("year", year);
+                FibonacciValues.put("month",month);
+                FibonacciValues.put("date", date);
+                FibonacciValues.put("pre", 1);
+                FibonacciValues.put("R", 0);
+                db.insert("FIBONACCI", null, FibonacciValues);
                 db.close();
                 return true;
             } catch (SQLiteException e) {

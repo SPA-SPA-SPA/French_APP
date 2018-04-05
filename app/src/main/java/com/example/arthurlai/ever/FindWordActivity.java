@@ -19,6 +19,7 @@ import android.widget.Toast;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class FindWordActivity extends AppCompatActivity {
 
@@ -31,11 +32,20 @@ public class FindWordActivity extends AppCompatActivity {
     private Button Text_Button_addOrDelete;
     private ProgressDialog dialog;
     private EditText editText;
+    private Integer year;
+    private Integer month;
+    private Integer date;
+    private Calendar today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_word);
+
+        today = Calendar.getInstance();
+        year = today.get(Calendar.YEAR);
+        month = today.get(Calendar.MONTH)+1;
+        date = today.get(Calendar.DATE);
 
         Text_word = (TextView) findViewById(R.id.Text_word);
         Text_change = (TextView) findViewById(R.id.Text_change);
@@ -223,13 +233,23 @@ public class FindWordActivity extends AppCompatActivity {
                 wordValues.put("Text_change", Text_change.getText().toString());
                 wordValues.put("Text_pronounces", Text_pronounces.getText().toString());
                 wordValues.put("Text_trans", Text_trans.getText().toString());
+                db.insert("WORDS", null, wordValues);
 
                 // 添加test标志
                 ContentValues testValues = new ContentValues();
                 testValues.put("Text_word", Text_word.getText().toString());
                 testValues.put("test", "");
                 db.insert("TEST",null, testValues);
-                db.insert("WORDS", null, wordValues);
+
+                // 添加进生词本时加进斐波那契学习进度中
+                ContentValues FibonacciValues = new ContentValues();
+                FibonacciValues.put("Text_word", Text_word.getText().toString());
+                FibonacciValues.put("year", year);
+                FibonacciValues.put("month",month);
+                FibonacciValues.put("date", date);
+                FibonacciValues.put("pre", 1);
+                FibonacciValues.put("R", 0);
+                db.insert("FIBONACCI", null, FibonacciValues);
                 db.close();
                 return true;
             } catch (SQLiteException e) {
@@ -263,6 +283,9 @@ public class FindWordActivity extends AppCompatActivity {
                         "Text_word = ?",
                         new String[] {Text_word.getText().toString()});
                 db.delete("TEST",
+                        "Text_word = ?",
+                        new String[] {Text_word.getText().toString()});
+                db.delete("FIBONACCI",
                         "Text_word = ?",
                         new String[] {Text_word.getText().toString()});
                 db.close();

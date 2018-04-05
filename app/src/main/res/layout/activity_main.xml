@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView_0"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:text="查询单词"
             android:onClick="findWord"/>
 
@@ -39,6 +38,16 @@
             android:onClick="WordList"
             android:text="生词本" />
 
+        <Button
+            android:id="@+id/Study_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/FindWord_page"
+            android:layout_alignStart="@+id/FindWord_page"
+            android:layout_below="@+id/NoteBook_page"
+            android:layout_marginTop="20dp"
+            android:onClick="Study"
+            android:text="背单词" />
 
     </RelativeLayout>
 
