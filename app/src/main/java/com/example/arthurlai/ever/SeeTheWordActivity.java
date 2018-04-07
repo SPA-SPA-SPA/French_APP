@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
     private String TheChange;
     private String Thepronounce;
     private String TheTrans;
+    private String TheMusic = null;
     private Cursor cursor;
     private SQLiteDatabase db;
 
@@ -59,9 +62,18 @@ public class SeeTheWordActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
-        super.onDestroy();
         cursor.close();
         db.close();
+        super.onDestroy();
+    }
+
+    // 播放读音
+    public void music(View view) {
+        String urlPath = TheMusic;
+        if (TheMusic.length()!=0) {
+            MediaPlayer mPlayer = MediaPlayer.create( this, Uri.parse(urlPath) );
+            mPlayer.start();
+        }
     }
 
     // 上一个
@@ -70,7 +82,8 @@ public class SeeTheWordActivity extends AppCompatActivity {
             TheWord = cursor.getString(0);
             TheChange = cursor.getString(1);
             Thepronounce = cursor.getString(2);
-            TheTrans = cursor.getString(3);
+            TheMusic = cursor.getString(3);
+            TheTrans = cursor.getString(4);
 
             word_see.setText(TheWord);
             change_see.setText(TheChange);
@@ -87,7 +100,8 @@ public class SeeTheWordActivity extends AppCompatActivity {
             TheWord = cursor.getString(0);
             TheChange = cursor.getString(1);
             Thepronounce = cursor.getString(2);
-            TheTrans = cursor.getString(3);
+            TheMusic = cursor.getString(3);
+            TheTrans = cursor.getString(4);
 
             word_see.setText(TheWord);
             change_see.setText(TheChange);
@@ -119,7 +133,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(SeeTheWordActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
                 cursor = db.query("WORDS",
-                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_trans"},
+                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_music", "Text_trans"},
                         null,
                         null,
                         null, null, null);
@@ -128,7 +142,8 @@ public class SeeTheWordActivity extends AppCompatActivity {
                     if (cursor.getString(0).equals(TheWord)) {
                         TheChange = cursor.getString(1);
                         Thepronounce = cursor.getString(2);
-                        TheTrans = cursor.getString(3);
+                        TheMusic = cursor.getString(3);
+                        TheTrans = cursor.getString(4);
                         break;
                     }
                 }while (cursor.moveToNext());
@@ -173,7 +188,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
                 }
                 cursor.close();
                 cursor = db.query("WORDS",
-                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_trans"},
+                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_music", "Text_trans"},
                         null,
                         null,
                         null, null, null);
@@ -182,7 +197,8 @@ public class SeeTheWordActivity extends AppCompatActivity {
                     if (cursor.getString(0).equals(TheWord)) {
                         TheChange = cursor.getString(1);
                         Thepronounce = cursor.getString(2);
-                        TheTrans = cursor.getString(3);
+                        TheMusic = cursor.getString(3);
+                        TheTrans = cursor.getString(4);
                         break;
                     }
                 }while (cursor.moveToNext());

@@ -30,6 +30,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
                 + "Text_word TEXT,"
                 + "Text_change TEXT,"
                 + "Text_pronounces TEXT,"
+                + "Text_music, TEXT,"
                 + "Text_trans TEXT);"
         );
 
@@ -63,14 +64,22 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));");
 
         // 输入例子
-        insertWord(db, "ありがとう", null, "[ありがとう] [arigatou] ②",
-                "【感叹词】 1.谢谢。");
-        insertWord(db, "かつて", null, "[かつて] [katsute] ①",
-                "【副词】1.曾经，以前。2.（后接否定）从来（没有）…，至今（未曾）…");
-        insertTEST(db, "ありがとう", null);
-        insertTEST(db, "かつて", null);
-        insertFIBONACCI(db, "ありがとう", c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
-        insertFIBONACCI(db, "かつて",  c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
+        insertWord(db, "Je t'aime", null, "[ʒətεm] ",
+                "http://tts.hjapi.com/fr/AD87C85A7AB36C35ADE7C420D269B877",
+                "loc. 我爱你");
+        insertWord(db, "曾经", null, "[céngjīng] ",
+                "http://tts.hjapi.com/py/F72309CBA170FDF9?phoneticsymbol=%E6%9B%BE%E7%BB%8F",
+                "详细释义\n" +
+                        "adv.\n" +
+                        "une fois;autrefois\n" +
+                        "\n" +
+                        "他们曾经是好友,现在不是了.\n" +
+                        "\n" +
+                        "Ils ont été très amis,mais ils ne le sont plus maintenant. ");
+        insertTEST(db, "Je t'aime", null);
+        insertTEST(db, "曾经", null);
+        insertFIBONACCI(db, "Je t'aime", c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
+        insertFIBONACCI(db, "曾经",  c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1, c.get(Calendar.DATE),1, 0);
     }
 
     @Override
@@ -80,11 +89,12 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
 
     // 插入WORDS
     private static void insertWord(SQLiteDatabase db, String Text_word, String Text_change,
-                                   String Text_pronounces, String Text_trans){
+                                   String Text_pronounces, String Text_music, String Text_trans){
         ContentValues wordValues = new ContentValues();
         wordValues.put("Text_Word", Text_word);
         wordValues.put("Text_change", Text_change);
         wordValues.put("Text_pronounces", Text_pronounces);
+        wordValues.put("Text_music", Text_music);
         wordValues.put("Text_trans", Text_trans);
         db.insert("WORDS", null, wordValues);
     }

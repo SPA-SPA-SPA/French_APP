@@ -15,7 +15,7 @@
             android:id="@+id/onesecond"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/zz" />
+            android:src="@drawable/pngzz" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -34,10 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/Text_word_see"
                         android:layout_width="wrap_content"
@@ -49,11 +48,19 @@
                         android:textSize="40dp"
                         android:text=""/>
 
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Text_word_see"
+                        android:layout_alignParentRight="true"
+                        android:onClick="music"
+                        android:text="读音"/>
+
                     <TextView
                         android:id="@+id/Text_change_see"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Text_word_q"
+                        android:layout_below="@id/Text_word_see"
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="1dp"
@@ -64,7 +71,7 @@
                         android:id="@+id/Text_pronounces_see"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Text_change_a"
+                        android:layout_below="@id/Text_change_see"
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="1dp"
@@ -75,14 +82,14 @@
                         android:id="@+id/Text_trans_see"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/Text_pronounces_a"
+                        android:layout_below="@id/Text_pronounces_see"
                         android:layout_weight="1"
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="1dp"
                         android:textSize="20dp"
                         android:text=""/>
-                </LinearLayout>
+                </RelativeLayout>
             </ScrollView>
 
             <RelativeLayout

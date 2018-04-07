@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +38,13 @@ public class FindWordActivity extends AppCompatActivity {
     private Integer month;
     private Integer date;
     private Calendar today;
+    String Text_Word;
+    String Text_Change;
+    String Text_Pronounces;
+    String Text_Trans;
+    String Text_Music = null;
+    public SQLiteDatabase db;
+    public Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +106,18 @@ public class FindWordActivity extends AppCompatActivity {
         }
     }
 
+    // 播放读音
+    public void music(View view) {
+        String urlPath = Text_Music;
+        if (Text_Music.length()!=0) {
+            MediaPlayer mPlayer = MediaPlayer.create( this, Uri.parse(urlPath) );
+            mPlayer.start();
+        }
+    }
+
     // Inner class to findWord
     class WordTask extends AsyncTask {
-        private String url = "https://dict.hjenglish.com/jp/jc/";
+        private String url = "https://dict.hjenglish.com/fr/";
         private Document doc;
         private String word;
         private String change = "";              // 变体
@@ -128,10 +146,13 @@ public class FindWordActivity extends AppCompatActivity {
                 else
                     pronounces = doc.select(".pronounces").text();
 
-                if (doc.select(".simple").text().length() != 0)
-                    trans = doc.select(".simple").first().text();
+                if (doc.select(".word-audio").attr("data-src").length() != 0)
+                    Text_Music = doc.select(".word-audio").attr("data-src");
+
+                if (doc.select(".word-details-item-content").text().length() != 0)
+                    trans = doc.select(".word-details-item-content").first().text();
                 else
-                    trans = doc.select(".simple").text();
+                    trans = doc.select(".word-details-item-content").text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -154,13 +175,6 @@ public class FindWordActivity extends AppCompatActivity {
 
     // inner class to checkWord（and then findWord）
     class checkWord extends AsyncTask<String, Void, Integer> {
-        String Text_Word;
-        String Text_Change;
-        String Text_Pronounces;
-        String Text_Trans;
-        public SQLiteDatabase db;
-        public Cursor cursor;
-
         protected void onPreExecute() {
 
         }
@@ -171,7 +185,7 @@ public class FindWordActivity extends AppCompatActivity {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
                 cursor = db.query("WORDS",
-                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_trans"},
+                        new String[] {"Text_word", "Text_change", "Text_pronounces", "Text_music", "Text_trans"},
                         "Text_word = ?",
                         new String[] {editText[0]},
                         null, null, null);
@@ -179,7 +193,8 @@ public class FindWordActivity extends AppCompatActivity {
                     Text_Word = cursor.getString(0);
                     Text_Change = cursor.getString(1);
                     Text_Pronounces = cursor.getString(2);
-                    Text_Trans = cursor.getString(3);
+                    Text_Music = cursor.getString(3);
+                    Text_Trans = cursor.getString(4);
                     cursor.close();
                     db.close();
                     return 1;
@@ -232,6 +247,7 @@ public class FindWordActivity extends AppCompatActivity {
                 wordValues.put("Text_Word", Text_word.getText().toString());
                 wordValues.put("Text_change", Text_change.getText().toString());
                 wordValues.put("Text_pronounces", Text_pronounces.getText().toString());
+                wordValues.put("Text_music", Text_Music);
                 wordValues.put("Text_trans", Text_trans.getText().toString());
                 db.insert("WORDS", null, wordValues);
 
