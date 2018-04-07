@@ -33,7 +33,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
     private String TheChange;
     private String Thepronounce;
     private String TheTrans;
-    private String TheMusic = null;
+    private String TheMusic = "";
     private Cursor cursor;
     private SQLiteDatabase db;
 

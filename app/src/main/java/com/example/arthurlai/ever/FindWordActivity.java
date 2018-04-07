@@ -42,7 +42,7 @@ public class FindWordActivity extends AppCompatActivity {
     String Text_Change;
     String Text_Pronounces;
     String Text_Trans;
-    String Text_Music = null;
+    String Text_Music = "";
     public SQLiteDatabase db;
     public Cursor cursor;
 
