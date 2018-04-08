@@ -1,6 +1,7 @@
 package com.example.arthurlai.ever;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,6 +24,9 @@ public class AddWordByHandActivity extends AppCompatActivity {
     private Integer month;
     private Integer date;
     private Calendar today;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    public Boolean notIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,9 @@ public class AddWordByHandActivity extends AppCompatActivity {
         if ((word_byhand.getText().toString().length() != 0) &&
                 (word_byhand.getText().toString().charAt(0) != ' ')
                 && (trans_byhand.getText().toString().length() != 0))
-            new AddWordByHand().execute();
+        {
+            new checkWord().execute(word_byhand.getText().toString());
+        }
         else {
             Toast toast = Toast.makeText(AddWordByHandActivity.this, "请填好带*项", Toast.LENGTH_SHORT);
             toast.show();
@@ -64,8 +70,6 @@ public class AddWordByHandActivity extends AppCompatActivity {
 
     // Inner class to addwordbyhand
     class AddWordByHand extends AsyncTask <Object, Void, Boolean>{
-        public SQLiteDatabase db;
-
         @Override
         protected Boolean doInBackground(Object[] objects) {
             try {
@@ -114,6 +118,45 @@ public class AddWordByHandActivity extends AppCompatActivity {
                 change_byhand.setText("");
                 pronounces_byhand.setText("");
                 trans_byhand.setText("");
+            }
+        }
+    }
+
+    // Inner class to checkWord
+    class checkWord extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... editText) {
+            try {
+                SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(AddWordByHandActivity.this);
+                db = EverDatabaseHelper.getReadableDatabase();
+                cursor = db.query("WORDS",
+                        new String[] {"Text_word"},
+                        "Text_word = ?",
+                        new String[] {editText[0]},
+                        null, null, null);
+                if (cursor.moveToFirst())
+                    notIn = false;
+                else
+                    notIn = true;
+                cursor.close();
+                db.close();
+                return true;
+            }catch (SQLiteException e){
+                return false;
+            }
+        }
+
+        protected void onPostExecute(Boolean success){
+            if (!success) {
+                Toast toast = Toast.makeText(AddWordByHandActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
+                toast.show();
+            }else if (notIn)
+                new AddWordByHand().execute();
+            else
+            {
+                Toast toast = Toast.makeText(AddWordByHandActivity.this, "这个单词已经存在！", Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
     }

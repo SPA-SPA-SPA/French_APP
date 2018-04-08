@@ -27,7 +27,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 创建了一个WORDS表
         db.execSQL("CREATE TABLE WORDS ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "Text_word TEXT,"
+                + "Text_word TEXT unique,"
                 + "Text_change TEXT,"
                 + "Text_pronounces TEXT,"
                 + "Text_music, TEXT,"
@@ -37,7 +37,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 创建了一个TEST表
         db.execSQL("CREATE TABLE TEST ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "Text_word TEXT ,"
+                + "Text_word TEXT unique,"
                 + "Test TEXT,"
                 + "FOREIGN KEY(Text_word)REFERENCES WORDS(Text_word));"
         );
@@ -45,7 +45,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 创建了一个FIBONACCI表
         db.execSQL("CREATE TABLE FIBONACCI ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "Text_word TEXT ,"
+                + "Text_word TEXT unique,"
                 + "Test TEXT,"
                 + "year INTEGER,"
                 + "month INTEGER,"
@@ -57,7 +57,7 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 创建了一个WORDDATE表
         db.execSQL("CREATE TABLE WORDDATE ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "Text_word TEXT,"
+                + "Text_word TEXT unique,"
                 + "year INTEGER,"
                 + "month INTEGER,"
                 + "date INTEGER,"
