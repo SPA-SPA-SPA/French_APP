@@ -76,6 +76,7 @@ public class AddWordByHandActivity extends AppCompatActivity {
                 wordValues.put("Text_Word", word_byhand.getText().toString());
                 wordValues.put("Text_change", change_byhand.getText().toString());
                 wordValues.put("Text_pronounces", pronounces_byhand.getText().toString());
+                wordValues.put("Text_music", "");
                 wordValues.put("Text_trans", trans_byhand.getText().toString());
                 db.insert("WORDS", null, wordValues);
 
