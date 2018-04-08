@@ -148,6 +148,8 @@ public class FindWordActivity extends AppCompatActivity {
 
                 if (doc.select(".word-audio").attr("data-src").length() != 0)
                     Text_Music = doc.select(".word-audio").attr("data-src");
+                else
+                    Text_Music = "";
 
                 if (doc.select(".word-details-item-content").text().length() != 0)
                     trans = doc.select(".word-details-item-content").first().text();
