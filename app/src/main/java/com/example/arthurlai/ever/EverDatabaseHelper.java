@@ -66,8 +66,8 @@ class EverDatabaseHelper extends SQLiteOpenHelper {
         // 输入例子
         insertWord(db, "Je t'aime", null, "[ʒətεm] ",
                 "http://tts.hjapi.com/fr/AD87C85A7AB36C35ADE7C420D269B877",
-                "loc. 我爱你");
-        insertWord(db, "曾经", null, "[céngjīng] ",
+                "loc. ilu");
+        insertWord(db, "not ", null, "[céngjīng] ",
                 "http://tts.hjapi.com/py/F72309CBA170FDF9?phoneticsymbol=%E6%9B%BE%E7%BB%8F",
                 "详细释义\n" +
                         "adv.\n" +

@@ -27,7 +27,7 @@ public class StudyActivity extends AppCompatActivity {
     private Cursor cursor_have;
     private Cursor cursor_yet;
     private Calendar today;
-    public SQLiteDatabase db;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,8 @@ public class StudyActivity extends AppCompatActivity {
 
         Text_have = (TextView)findViewById(R.id.text_have);
         Text_yet = (TextView)findViewById(R.id.text_yet);
-        Text_have.setTextColor(Color.CYAN);
+        // 设置颜色
+        Text_have.setTextColor(Color.parseColor("#ff0000ff"));
         Text_yet.setTextColor(Color.RED);
 
         new GetNumAboutWords().execute();

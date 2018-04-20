@@ -49,6 +49,15 @@
                 android:layout_marginRight="1dp"
                 android:text="查询"
                 android:onClick="findWord" />
+
+            <TextView
+                android:id="@+id/Text_InOrNot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_text"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text=""/>
         </RelativeLayout>
 
 <ScrollView
@@ -61,18 +70,9 @@
     >
 
         <TextView
-            android:id="@+id/Text_InOrNot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text=""/>
-
-        <TextView
             android:id="@+id/Text_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Text_InOrNot"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="1dp"
@@ -103,6 +103,7 @@
             android:text=""/>
 
         <Button
+            android:id="@+id/Button_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Text_change"

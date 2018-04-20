@@ -26,23 +26,28 @@ public class AddWordByHandActivity extends AppCompatActivity {
     private Calendar today;
     private SQLiteDatabase db;
     private Cursor cursor;
-    public Boolean notIn;
+    private Boolean notIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_word_by_hand);
 
+        // 获取今天的日期
         today = Calendar.getInstance();
         year = today.get(Calendar.YEAR);
         month = today.get(Calendar.MONTH)+1;
         date = today.get(Calendar.DATE);
 
+        // 获取控件
         word_byhand = (EditText)findViewById(R.id.word_byhand);
         change_byhand = (EditText) findViewById(R.id.change_byhand);
         pronounces_byhand = (EditText) findViewById(R.id.pronounces_byhand);
         trans_byhand = (EditText) findViewById(R.id.trans_byhand);
+
+        // 获得从上个活动传过来的消息
         String messageText = getIntent().getStringExtra("word");
+        // 设置控件的属性值
         word_byhand.setText(messageText);
     }
 
@@ -56,6 +61,7 @@ public class AddWordByHandActivity extends AppCompatActivity {
 
     // 添加单词
     public void AddWordByHand (View view) {
+        // 判断输入框是否为空
         if ((word_byhand.getText().toString().length() != 0) &&
                 (word_byhand.getText().toString().charAt(0) != ' ')
                 && (trans_byhand.getText().toString().length() != 0))
@@ -73,6 +79,7 @@ public class AddWordByHandActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Object[] objects) {
             try {
+                // 获取数据库帮助器
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(AddWordByHandActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
                 // 添加单词
@@ -99,6 +106,8 @@ public class AddWordByHandActivity extends AppCompatActivity {
                 FibonacciValues.put("pre", 1);
                 FibonacciValues.put("R", 0);
                 db.insert("FIBONACCI", null, FibonacciValues);
+
+                // 关闭数据库
                 db.close();
                 return true;
             } catch (SQLiteException e) {
@@ -152,6 +161,7 @@ public class AddWordByHandActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(AddWordByHandActivity.this, "EverDataBase unavailable", Toast.LENGTH_SHORT);
                 toast.show();
             }else if (notIn)
+                // 启动另一个内部类
                 new AddWordByHand().execute();
             else
             {

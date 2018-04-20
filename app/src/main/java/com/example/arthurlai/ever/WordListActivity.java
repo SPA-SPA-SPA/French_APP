@@ -26,24 +26,29 @@ public class WordListActivity extends AppCompatActivity {
     private Cursor cursor_getlist_new;
     private Cursor cursor_getlist_new_2;
     private Integer word_num;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
+        // 执行内部类得到单词数和单词列表
         new GetNumOfWords().execute();
         new GetWordList().execute();
 
-        // 监听器，监听列表的点击
+        // 定义监听器，监听列表的点击
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
+            // 一旦点击列表项，就会触发这个方法
+            //  打开了一个新活动，并传递了一个字符串
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(WordListActivity.this, SeeTheWordActivity.class);
                 intent.putExtra("word", cursor_getlist.getString(1).toString());
                 startActivity(intent);
             }
         };
-        ListView listView = (ListView)findViewById(R.id.List_Words);
+        // 设置监听器
+        listView = (ListView)findViewById(R.id.List_Words);
         listView.setOnItemClickListener(itemClickListener);
     }
 
@@ -57,9 +62,8 @@ public class WordListActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        ListView listView = (ListView)findViewById(R.id.List_Words);
         cursor_getlist_new_2 = db.query("WORDS",
-                new String[]{"_id", "Text_word", "Text_trans"},
+                new String[]{"_id", "Text_word", "Text_pronounces"},
                 null, null, null, null, null);
         CursorAdapter adapter = (CursorAdapter)listView.getAdapter();
         adapter.changeCursor(cursor_getlist_new_2);
@@ -87,23 +91,19 @@ public class WordListActivity extends AppCompatActivity {
 
     // Inner class to get wordlist
     private class GetWordList extends AsyncTask <Object, Void, Boolean>{
-        protected void onPreExecute() {
-
-        }
-
         @Override
         protected Boolean doInBackground(Object[] objects) {
-            ListView listView = (ListView)findViewById(R.id.List_Words);
             try {
                 // 这个游标给列表提供单词
                 cursor_getlist = db.query("WORDS",
-                        new String[]{"_id", "Text_word", "Text_trans"},
+                        new String[]{"_id", "Text_word", "Text_pronounces"},
                         null, null, null, null, null);
+                //
                 CursorAdapter listAdapter = new SimpleCursorAdapter(WordListActivity.this,
-                        android.R.layout.simple_list_item_2,
+                        R.layout.listview_item_layout,
                         cursor_getlist,
-                        new String[]{"Text_word", "Text_trans"},
-                        new int[]{android.R.id.text1, android.R.id.text2},
+                        new String[]{"Text_word", "Text_pronounces"},
+                        new int[]{R.id.text, R.id.text2},
                         0);
                 listView.setAdapter(listAdapter);
                 return true;
@@ -123,11 +123,6 @@ public class WordListActivity extends AppCompatActivity {
     // Inner class to getnum
     private class GetNumOfWords extends AsyncTask<Object, Void, Boolean> {
         TextView justAView = (TextView) findViewById(R.id.Text_JustAView);
-
-        protected void onPreExecute() {
-
-        }
-
         @Override
         protected Boolean doInBackground(Object[] objects) {
             try {

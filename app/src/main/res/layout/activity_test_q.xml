@@ -73,6 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="No"
+                    android:textSize="15dp"
                     android:text="不认识"/>
 
                 <Button
@@ -80,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="SeeAnswer"
+                    android:textSize="15dp"
                     android:text="显示答案"/>
 
 
@@ -90,6 +92,7 @@
                     android:layout_below="@id/Button_no"
                     android:layout_marginTop="20dp"
                     android:onClick="Yes"
+                    android:textSize="15dp"
                     android:text="认识"/>
             </RelativeLayout>
 

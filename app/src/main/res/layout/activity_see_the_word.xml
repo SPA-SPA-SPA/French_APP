@@ -49,6 +49,7 @@
                         android:text=""/>
 
                     <Button
+                        android:id="@+id/Button_music"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/Text_word_see"

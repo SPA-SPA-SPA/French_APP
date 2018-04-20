@@ -31,8 +31,8 @@ public class FibonacciActivity extends AppCompatActivity {
     private Integer j = 0;
     private Calendar today;
     private Calendar tool;
-    public SQLiteDatabase db;
-    public Cursor cursor;
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +142,12 @@ public class FibonacciActivity extends AppCompatActivity {
             try {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FibonacciActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
-                String q = "SELECT WORDS.Text_word, Text_change, Text_pronounces, Text_trans, pre, R FROM WORDS INNER JOIN FIBONACCI ON WORDS.Text_word = FIBONACCI.Text_word where (year < ?) or (year = ? and month < ?) or (year = ? and month = ? and date <= ?)";
-                cursor = db.rawQuery(q,new String[] {year.toString(), year.toString(), month.toString(), year.toString(), month.toString(), date.toString()});
+                String q = "SELECT WORDS.Text_word, Text_change, Text_pronounces," +
+                        " Text_trans, pre, R FROM WORDS INNER JOIN FIBONACCI ON WORDS.Text_word " +
+                        "= FIBONACCI.Text_word where (year < ?) or (year = ? and month < ?) or " +
+                        "(year = ? and month = ? and date <= ?)";
+                cursor = db.rawQuery(q,new String[] {year.toString(), year.toString(),
+                        month.toString(), year.toString(), month.toString(), date.toString()});
                 return true;
             }catch (SQLiteException e){
                 return false;

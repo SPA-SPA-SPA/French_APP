@@ -29,6 +29,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
     private TextView trans_see;
     private Button Button_pre;
     private Button Button_next;
+    private Button Button_music;
     private String TheWord;
     private String TheChange;
     private String Thepronounce;
@@ -48,6 +49,7 @@ public class SeeTheWordActivity extends AppCompatActivity {
         trans_see = (TextView)findViewById(R.id.Text_trans_see);
         Button_pre = (Button)findViewById(R.id.Button_backward);
         Button_next = (Button)findViewById(R.id.Button_forward);
+        Button_music = (Button)findViewById(R.id.Button_music);
 
         TheWord = getIntent().getStringExtra("word");
         word_see.setText(TheWord);
@@ -89,9 +91,16 @@ public class SeeTheWordActivity extends AppCompatActivity {
             change_see.setText(TheChange);
             pronounce_see.setText(Thepronounce);
             trans_see.setText(TheTrans);
+            if(TheMusic.length()!=0)
+                Button_music.setVisibility(View.VISIBLE);
+            else
+                Button_music.setVisibility(View.INVISIBLE);
         }
-        else
+        else {
+            Toast toast = Toast.makeText(SeeTheWordActivity.this, "已经是第一个了", Toast.LENGTH_SHORT);
+            toast.show();
             cursor.moveToNext();
+        }
     }
 
     // 下一个
@@ -107,9 +116,16 @@ public class SeeTheWordActivity extends AppCompatActivity {
             change_see.setText(TheChange);
             pronounce_see.setText(Thepronounce);
             trans_see.setText(TheTrans);
+            if(TheMusic.length()!=0)
+                Button_music.setVisibility(View.VISIBLE);
+            else
+                Button_music.setVisibility(View.INVISIBLE);
         }
-        else
+        else {
+            Toast toast = Toast.makeText(SeeTheWordActivity.this, "已经是最后一个了", Toast.LENGTH_SHORT);
+            toast.show();
             cursor.moveToPrevious();
+        }
     }
 
     // 修改
@@ -160,6 +176,10 @@ public class SeeTheWordActivity extends AppCompatActivity {
             }else {
                 change_see.setText(TheChange);
                 pronounce_see.setText(Thepronounce);
+                if(TheMusic.length()!=0)
+                    Button_music.setVisibility(View.VISIBLE);
+                else
+                    Button_music.setVisibility(View.INVISIBLE);
                 trans_see.setText(TheTrans);
             }
         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">法语学习APP</string>
+    <string name="app_name">法语单词学习APP</string>
     <string name="FindWordActivity">查询单词</string>
     <string name="WordListActivity">生词本</string>
     <string name="AddWordByHandActivity">手动添加单词</string>

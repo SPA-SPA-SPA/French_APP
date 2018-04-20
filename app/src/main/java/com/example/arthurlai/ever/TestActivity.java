@@ -21,9 +21,9 @@ public class TestActivity extends AppCompatActivity {
     private TextView Text_sum_num;
     private Cursor cursor_T;
     private Cursor cursor_F;
-    public Integer word_num_T;
-    public Integer word_num_F;
-    public SQLiteDatabase db;
+    private Integer word_num_T;
+    private Integer word_num_F;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +33,23 @@ public class TestActivity extends AppCompatActivity {
         Text_right_num = (TextView)findViewById(R.id.text_right_num);
         Text_wrong_num = (TextView)findViewById(R.id.text_wrong_num);
         Text_sum_num = (TextView)findViewById(R.id.text_sum_num);
-        Text_right_num.setTextColor(Color.CYAN);
+        // 设置颜色
+        Text_right_num.setTextColor(Color.parseColor("#ff0000ff"));
         Text_wrong_num.setTextColor(Color.RED);
         Text_sum_num.setText(getIntent().getStringExtra("num"));
+        // 执行内部类
         new GetNum().execute();
     }
 
     @Override
     public void onRestart() {
-
         super.onRestart();
         new GetNum().execute();
     }
 
     // 测试所有单词
     public void TestAll(View view) {
+        // 字符串转化为整数
         if (Integer.valueOf(getIntent().getStringExtra("num")) != 0) {
             Intent intent = new Intent(this, TestQActivity.class);
             startActivity(intent);
@@ -83,6 +85,7 @@ public class TestActivity extends AppCompatActivity {
 
                 word_num_T = cursor_T.getCount();
                 word_num_F = cursor_F.getCount();
+                // 关闭游标
                 cursor_T.close();
                 cursor_F.close();
                 return true;

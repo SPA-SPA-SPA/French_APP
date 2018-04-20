@@ -32,30 +32,33 @@ public class FindWordActivity extends AppCompatActivity {
     private TextView Text_source;
     private TextView Text_InOrNot;
     private Button Text_Button_addOrDelete;
+    private Button Text_Button_music;
     private ProgressDialog dialog;
     private EditText editText;
     private Integer year;
     private Integer month;
     private Integer date;
     private Calendar today;
-    String Text_Word;
-    String Text_Change;
-    String Text_Pronounces;
-    String Text_Trans;
-    String Text_Music = "";
-    public SQLiteDatabase db;
-    public Cursor cursor;
+    private String Text_Word;
+    private String Text_Change;
+    private String Text_Pronounces;
+    private String Text_Trans;
+    private String Text_Music=""; // 初始化为空，否则会出现问题
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_word);
 
+        // 获取今天的日期
         today = Calendar.getInstance();
         year = today.get(Calendar.YEAR);
         month = today.get(Calendar.MONTH)+1;
         date = today.get(Calendar.DATE);
 
+        // 获取布局对象
         Text_word = (TextView) findViewById(R.id.Text_word);
         Text_change = (TextView) findViewById(R.id.Text_change);
         Text_pronounces = (TextView) findViewById(R.id.Text_pronounces);
@@ -63,8 +66,14 @@ public class FindWordActivity extends AppCompatActivity {
         Text_source = (TextView) findViewById(R.id.Text_source);
         Text_InOrNot = (TextView) findViewById(R.id.Text_InOrNot);
         Text_Button_addOrDelete = (Button) findViewById(R.id.Button_addOrDelete);
+        Text_Button_music = (Button)findViewById(R.id.Button_music);
         editText = (EditText) findViewById(R.id.edit_text);
 
+        // 设置布局
+        Text_Button_addOrDelete.setVisibility(View.INVISIBLE);
+        Text_Button_music.setVisibility(View.INVISIBLE);
+
+        // 设置正在查询
         dialog = new ProgressDialog(this);
         dialog.setTitle("正在查询");
     }
@@ -117,6 +126,7 @@ public class FindWordActivity extends AppCompatActivity {
 
     // Inner class to findWord
     class WordTask extends AsyncTask {
+        // 声明一些内部类要用的对象
         private String url = "https://dict.hjenglish.com/fr/";
         private Document doc;
         private String word;
@@ -126,6 +136,7 @@ public class FindWordActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            // 内部类可以使用外部类声明的对象
             word = editText.getText().toString();
             url = url+ word;
             dialog.show();
@@ -135,6 +146,7 @@ public class FindWordActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] params) {
             try {
+                // 获取网页并分析
                 doc = Jsoup.connect(url).timeout(3000).get();
                 if (doc.select(".redirection").text().length() != 0)
                     change = doc.select(".redirection").first().text();
@@ -163,13 +175,19 @@ public class FindWordActivity extends AppCompatActivity {
 
 
         protected void onPostExecute(Object o) {
+            // 这里可以进行主线程中的布局操作
             Text_word.setText(word);
             Text_change.setText(change);
             if (pronounces.length() !=0) Text_pronounces.setText(pronounces);
             else Text_pronounces.setText("无资料显示");
+            if (Text_Music.length() !=0)
+                Text_Button_music.setVisibility(View.VISIBLE);
+            else
+                Text_Button_music.setVisibility(View.INVISIBLE);
             if (trans.length() !=0) Text_trans.setText(trans);
             else Text_trans.setText("无资料显示");
             Text_source.setText("资料来源：沪江小D");
+            Text_Button_addOrDelete.setVisibility(View.VISIBLE);
             dialog.dismiss();
             super.onPostExecute(o);
         }
@@ -177,10 +195,6 @@ public class FindWordActivity extends AppCompatActivity {
 
     // inner class to checkWord（and then findWord）
     class checkWord extends AsyncTask<String, Void, Integer> {
-        protected void onPreExecute() {
-
-        }
-
         @Override
         protected Integer doInBackground(String... editText) {
             try {
@@ -222,8 +236,13 @@ public class FindWordActivity extends AppCompatActivity {
                 Text_word.setText(Text_Word);
                 Text_change.setText(Text_Change);
                 Text_pronounces.setText(Text_Pronounces);
+                if (Text_Music.length() !=0)
+                    Text_Button_music.setVisibility(View.VISIBLE);
+                else
+                    Text_Button_music.setVisibility(View.INVISIBLE);
                 Text_trans.setText(Text_Trans);
                 Text_source.setText("资料来源：本地生词本");
+                Text_Button_addOrDelete.setVisibility(View.VISIBLE);
                 Text_Button_addOrDelete.setText("—");
             }
             else {
@@ -238,13 +257,12 @@ public class FindWordActivity extends AppCompatActivity {
 
     // inner class to addword
     class addWord extends AsyncTask <Object, Void, Boolean>{
-        public SQLiteDatabase db;
-
         @Override
         protected Boolean doInBackground(Object[] objects) {
             try {
                 SQLiteOpenHelper EverDatabaseHelper = new EverDatabaseHelper(FindWordActivity.this);
                 db = EverDatabaseHelper.getReadableDatabase();
+                // 添加单词进WORDS表
                 ContentValues wordValues = new ContentValues();
                 wordValues.put("Text_Word", Text_word.getText().toString());
                 wordValues.put("Text_change", Text_change.getText().toString());
@@ -290,8 +308,6 @@ public class FindWordActivity extends AppCompatActivity {
 
     // inner class to deleteWord
     class deleteWord extends AsyncTask <Object, Void, Boolean>{
-        public SQLiteDatabase db;
-
         @Override
         protected Boolean doInBackground(Object[] objects) {
             try {

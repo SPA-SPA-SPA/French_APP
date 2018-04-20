@@ -21,8 +21,8 @@ public class TestQ2Activity extends AppCompatActivity {
     private Button ButtonYes;
     private Button ButtonNo;
     private Button ButtonAnswer;
-    public SQLiteDatabase db;
-    public Cursor cursor;
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

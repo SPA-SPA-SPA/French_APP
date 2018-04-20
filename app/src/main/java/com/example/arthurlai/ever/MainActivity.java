@@ -20,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 这个方法打开WordListActivity
     public void WordList(View view) {
         Intent intent = new Intent(this, WordListActivity.class);
         startActivity(intent);
     }
 
+    // 这个方法打开StudyActivity
     public void Study(View view) {
         Intent intent = new Intent(this, StudyActivity.class);
         startActivity(intent);

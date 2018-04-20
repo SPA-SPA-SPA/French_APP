@@ -23,8 +23,8 @@ public class UpdateActivity extends AppCompatActivity {
     private String pronounces;   // 读音
     private String trans;      // 翻译
     private String messageText;
-    public SQLiteDatabase db;
-    public Cursor cursor;
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
